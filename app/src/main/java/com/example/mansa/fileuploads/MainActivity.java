@@ -28,6 +28,7 @@ import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.IOException;
@@ -76,23 +77,21 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == SELECT_FILE) {
 
-                Uri _uri= data.getData();
+                Uri _uri = data.getData();
 
 
-                if(sdk >= 19){
+                if (sdk >= 19) {
                     filePath = getRealPathFromURI_API19(getBaseContext(), _uri);
-                }else if(sdk > 10 && sdk < 19){
+                } else if (sdk > 10 && sdk < 19) {
                     filePath = getRealPathFromURI_API11to18(getBaseContext(), _uri);
-                }else {
+                } else {
                     filePath = getRealPathFromURI_BelowAPI11(getBaseContext(), _uri);
 
                 }
-                 initUpload();
+                initUpload();
             }
         }
-
     }
-
 
 
     private void initUpload(){
@@ -116,8 +115,8 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-            Log.i(TAG, "Hurray");
-
+            Log.i(TAG, "Upload Successful");
+            Toast.makeText(getBaseContext(), "Upload Successful", Toast.LENGTH_SHORT).show();
 
         }
 
